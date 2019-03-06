@@ -15,6 +15,9 @@ Route::get('/login', 'Auth\LoginController@showLoginForm');
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 
 Route::get('/', 'ProductController@listNewAdded');
+Route::get('/listado-productos', 'ProductController@getList')->name('productList');
+Route::get('/productos-por-marca', 'ProductController@listBrands')->name('listBrands');
+Route::get('/producto/{id}/detalle', 'ProductController@detalleProducto')->name('detalleProducto');
 Route::post('/agregar-producto/{id}/carrito', 'ProductController@agregarProductoCarrito')->name('agregarProducto');
 Route::get('/listar-carrito', 'ProductController@listarCarrito')->name('listarCarrito');
 Route::delete('/eliminar-producto/{id}/carrito', 'ProductController@eliminarItem')->name('eliminarItem');

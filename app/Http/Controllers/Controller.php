@@ -28,7 +28,7 @@ class Controller extends BaseController
     	$total = 0;
     	if (session()->has('products')) {
 			foreach (session('products') as $product) {
-				$total += $product['prod_precio'];
+				$total += ($product['prod_precio'] * $product['cantidad']);
 			}
 	    }
 

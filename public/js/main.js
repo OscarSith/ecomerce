@@ -99,7 +99,7 @@
       },
     ]
   });
-
+*/
   // PRODUCT DETAILS SLICK
   $('#product-main-view').slick({
     infinite: true,
@@ -118,7 +118,6 @@
     focusOnSelect: true,
     asNavFor: '#product-main-view',
   });
-  */
 
   // PRODUCT ZOOM
   // $('#product-main-view .product-view').zoom();

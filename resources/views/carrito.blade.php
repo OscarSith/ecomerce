@@ -30,7 +30,7 @@
 									<tr>
 										<td class="thumb"><img src="{{ $product['prod_imagen'] }}" alt=""></td>
 										<td class="details">
-											<a href="#">{{ $product['prod_nombre'] }}</a>
+											<a href="{{ route('detalleProducto', $product['id']) }}">{{ $product['prod_nombre'] }}</a>
 											<ul>
 												<li><span>Size: XL</span></li>
 												<li><span>Color: Camelot</span></li>

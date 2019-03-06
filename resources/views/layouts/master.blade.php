@@ -9,7 +9,9 @@
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
-	<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+	<link rel="stylesheet" rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/slick.css') }}" />
+	<link type="text/css" rel="stylesheet" href="{{ asset('css/slick-theme.css') }}" />
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}" />
@@ -37,7 +39,7 @@
 							</div>
 							<strong class="text-uppercase">
 								@guest
-								Account
+								Cuenta
 								@endguest
 								@auth
 								{{ Auth::user()->nombre }} <i class="fa fa-caret-down"></i>
@@ -45,7 +47,7 @@
 							</strong>
 						</div>
 						@guest
-						<a href="login" class="text-uppercase">Login</a>
+						<a href="{{ route('login') }}" class="text-uppercase">Login</a>
 						@endguest
 						@auth
 						<ul class="custom-menu">
@@ -187,8 +189,8 @@
 					<li class="dropdown default-dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Productos <i class="fa fa-caret-down"></i></a>
 						<ul class="custom-menu">
-							<li><a href="index.html">Lista de precios</a></li>
-							<li><a href="products.html">Productos por categoria</a></li>
+							<li><a href="{{ route('productList') }}">Lista de precios</a></li>
+							<li><a href="{{ route('listBrands')}}">Productos por marca</a></li>
 							<li><a href="product-page.html">Product Details</a></li>
 						</ul>
 					</li>
@@ -206,8 +208,7 @@
 <div id="breadcrumb">
 	<div class="container">
 		<ul class="breadcrumb">
-			<li><a href="#">Home</a></li>
-			<li class="active">Blank</li>
+			<li class="active">Home</li>
 		</ul>
 	</div>
 </div>
@@ -240,8 +241,8 @@
 				<div class="footer">
 					<!-- footer logo -->
 					<div class="footer-logo">
-						<a class="logo" href="#">
-							<img src="./img/logo.png" alt="">
+						<a class="logo" href="/">
+							<img src="{{ asset('') }}./img/logo.png" alt="">
 						</a>
 					</div>
 					<!-- /footer logo -->
@@ -314,6 +315,7 @@
 <!-- /FOOTER -->
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/slick.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>
