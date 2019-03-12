@@ -20,7 +20,7 @@ class SaleController extends Controller
 		$sale = new Sale([
 			'id_user' => Auth::user()->id,
 			'nro_orden' => 'OD'.str_pad($configuracion->nro_orden, 6, '0', STR_PAD_LEFT),
-			'nro_factura' => 'FA',str_pad($configuracion->nro_factura, 6, '0', STR_PAD_LEFT),
+			'nro_factura' => 'FA'.str_pad($configuracion->nro_factura, 6, '0', STR_PAD_LEFT),
 			'total_venta' => $request->session()->get('precioTotal')
 		]);
 		$sale->save();

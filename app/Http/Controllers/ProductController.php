@@ -20,8 +20,17 @@ class ProductController extends Controller
 
     public function getList(Request $request) {
 		// id_marca => si en caso se pasa por parametro ese flag, se filtra por marca
-	    $productList = $this->getListProducts('>', $request->input('id_marca', 0));
-		return view('product-list', compact('productList'));
+	    $id_marca = $request->input('id_marca', 0);
+	    $stock = $request->input('stock');
+	    $flag = '>';
+
+	    if (!$stock) {
+	    	$flag = '>=';
+	    }
+	    $productList = $this->getListProducts($flag, $id_marca);
+	    $brands = DB::table('brands')->get();
+
+		return view('product-list', compact('productList', 'brands', 'id_marca', 'stock'));
     }
 
     public function listBrands() {
@@ -36,7 +45,7 @@ class ProductController extends Controller
 
     function agregarProductoCarrito(Request $request, $id) {
     	$productSession = Product::find($id)->toArray();
-    	$productSession['cantidad'] = $request->has('cantidad') ? $request->input('cantidad') : 1;
+    	$productSession['cantidad'] = $request->has('cantidad') ? (int)$request->input('cantidad') : 1;
 
 		$request->session()->put('products.prod'.$id, $productSession);
 		return redirect()->back();
@@ -54,6 +63,11 @@ class ProductController extends Controller
     public function eliminarItem($id) {
 		session()->forget('products.prod' . $id);
 		return redirect()->back()->with(['success_message' => 'Producto eliminado del carrito']);
+    }
+
+    public function actualizarItem(Request $request, $id) {
+		session()->put('products.prod' . $id . '.cantidad', $request->input('cantidad'));
+	    return redirect()->back()->with(['success_message' => 'Producto Actualizado del carrito']);
     }
 
     private function getListProducts($flag, $id_brand = 0) {

@@ -236,6 +236,7 @@ textarea.input {
   -webkit-transform: translateX(10px);
   -ms-transform: translateX(10px);
   transform: translateX(10px);
+  font-weight: bold;
 }
 
 .list-links li>a:hover:before, .list-links li>a:focus:before, .list-links li.active>a:before {
@@ -357,6 +358,7 @@ textarea.input {
   display: inline-block;
   padding: 15px 0px;
   max-width: 400px;
+  min-width: 300px;
 }
 
 .header-search>form {
@@ -1193,12 +1195,13 @@ textarea.input {
 \*----------------------------*/
 
 #store {
-  margin-top: 15px;
+  margin-top: 13px;
   padding-top: 30px;
   border-top: 1px solid #DADADA;
   margin-bottom: 15px;
   padding-bottom: 30px;
   border-bottom: 1px solid #DADADA;
+  overflow: hidden;
 }
 
 /*-- store filter --*/

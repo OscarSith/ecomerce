@@ -17,15 +17,15 @@
 						<table class="shopping-cart-table table">
 							<thead>
 								<tr>
-									<th>Product</th>
+									<th>Producto</th>
 									<th></th>
-									<th class="text-center">Price</th>
-									<th class="text-center">Quantity</th>
+									<th class="text-center">Precio</th>
+									<th class="text-center">Cantidad</th>
 									<th class="text-center">Total</th>
 									<th class="text-right"></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="tabla-carrito">
 								@foreach($listacarrito as $product)
 									<tr>
 										<td class="thumb"><img src="{{ $product['prod_imagen'] }}" alt=""></td>
@@ -37,12 +37,19 @@
 											</ul>
 										</td>
 										<td class="price text-center"><strong>S/. {{ $product['prod_precio'] }}</strong></td>
-										<td class="qty text-center"><input class="input" type="number" value="{{ (isset($product['cantidad']) ? $product['cantidad'] : 1) }}"></td>
+										<td class="qty text-center">
+											<input class="input cantidad-event" type="number" value="{{ $product['cantidad'] }}">
+										</td>
 										<td class="total text-center">
 											<strong class="primary-color">S/. {{ $product['prod_precio'] * (isset($product['cantidad']) ? $product['cantidad'] : 1) }}</strong>
 										</td>
 										<td class="text-right">
-											<button class="main-btn icon-btn"><i class="fa fa-pencil"></i></button>
+											<form action="{{ route('actualizarItem', $product['id']) }}" method="post" style="display: inline;">
+												@method('PUT')
+												@csrf
+												<input type="hidden" class="cantidad-value" name="cantidad" value="{{ $product['cantidad'] }}">
+												<button class="main-btn icon-btn"><i class="fa fa-pencil"></i></button>
+											</form>
 											<form action="{{ route('eliminarItem', $product['id']) }}" style="display: inline;" method="post">
 												@method('DELETE')
 												@csrf

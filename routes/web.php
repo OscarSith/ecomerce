@@ -21,6 +21,7 @@ Route::get('/producto/{id}/detalle', 'ProductController@detalleProducto')->name(
 Route::post('/agregar-producto/{id}/carrito', 'ProductController@agregarProductoCarrito')->name('agregarProducto');
 Route::get('/listar-carrito', 'ProductController@listarCarrito')->name('listarCarrito');
 Route::delete('/eliminar-producto/{id}/carrito', 'ProductController@eliminarItem')->name('eliminarItem');
+Route::put('/actualizar-producto/{id}/carrito', 'ProductController@actualizarItem')->name('actualizarItem');
 
 Route::get('/detalle-venta', 'SaleController@venta')
 	->name('venta')

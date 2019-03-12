@@ -144,4 +144,9 @@
     });
   }
 
+  $('#tabla-carrito').on('change', '.cantidad-event', function (e) {
+    var $td = $(e.target).closest('tr').find('td:last');
+    $td.find('.cantidad-value').val(e.target.value);
+  });
+
 })(jQuery);

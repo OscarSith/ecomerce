@@ -28,6 +28,12 @@
 					</a>
 				</div>
 				<!-- /Logo -->
+				<div class="header-search hide">
+					<form method="get">
+						<input class="input" type="text" placeholder="Buscar" name="search">
+						<button class="search-btn"><i class="fa fa-search"></i></button>
+					</form>
+				</div>
 			</div>
 			<div class="pull-right">
 				<ul class="header-btns">
@@ -127,8 +133,7 @@
 							<div class="row">
 								<div class="col-md-4">
 									<ul class="list-links">
-										<li>
-											<h3 class="list-links-title">Categories</h3></li>
+										<li><h3 class="list-links-title">Categories</h3></li>
 										<li><a href="#">Women’s Clothing</a></li>
 										<li><a href="#">Men’s Clothing</a></li>
 										<li><a href="#">Phones & Accessories</a></li>
@@ -151,8 +156,7 @@
 								</div>
 								<div class="col-md-4">
 									<ul class="list-links">
-										<li>
-											<h3 class="list-links-title">Categories</h3></li>
+										<li><h3 class="list-links-title">Categories</h3></li>
 										<li><a href="#">Women’s Clothing</a></li>
 										<li><a href="#">Men’s Clothing</a></li>
 										<li><a href="#">Phones & Accessories</a></li>
@@ -189,7 +193,7 @@
 					<li class="dropdown default-dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Productos <i class="fa fa-caret-down"></i></a>
 						<ul class="custom-menu">
-							<li><a href="{{ route('productList') }}">Lista de precios</a></li>
+							<li><a href="{{ route('productList') }}?id_marca=0&stock=1&sort=alfa">Lista de precios</a></li>
 							<li><a href="{{ route('listBrands')}}">Productos por marca</a></li>
 							<li><a href="product-page.html">Product Details</a></li>
 						</ul>
