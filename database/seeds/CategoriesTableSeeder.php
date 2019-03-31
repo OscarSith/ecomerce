@@ -15,5 +15,7 @@ class CategoriesTableSeeder extends Seeder
         DB::table('categories')->insert(['cat_nombre' => 'Impresoras']);
         DB::table('categories')->insert(['cat_nombre' => 'Computadoras']);
         DB::table('categories')->insert(['cat_nombre' => 'Laptops']);
+        DB::table('categories')->insert(['cat_nombre' => 'Servidores']);
+        DB::table('categories')->insert(['cat_nombre' => 'Monitores']);
     }
 }
