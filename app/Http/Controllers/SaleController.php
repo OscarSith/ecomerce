@@ -9,19 +9,29 @@ use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
-	public function paginaDetalleVenta() {
+	public function __construct()
+	{
+		parent::__construct();
+	}
 
+	public function detalleVenta(Request $request) {
+		$products = $request->session()->get('products');
+		$precioTotal = $this->totalMontoCarrito();
+		$configuracion = DB::table('configuracion')->first();
+
+		return view('checkout', compact('products', 'precioTotal', 'configuracion'));
 	}
 
 	public function venta(Request $request) {
 		$configuracion = DB::table('configuracion')->first();
 		$products = $request->session()->get('products');
+		$precioTotal = $this->totalMontoCarrito();
 
 		$sale = new Sale([
 			'id_user' => Auth::user()->id,
 			'nro_orden' => 'OD'.str_pad($configuracion->nro_orden, 6, '0', STR_PAD_LEFT),
 			'nro_factura' => 'FA'.str_pad($configuracion->nro_factura, 6, '0', STR_PAD_LEFT),
-			'total_venta' => $request->session()->get('precioTotal')
+			'total_venta' => $precioTotal
 		]);
 		$sale->save();
 
@@ -42,6 +52,10 @@ class SaleController extends Controller
 		DB::table('configuracion')->increment('nro_orden', 1);
 		DB::table('configuracion')->increment('nro_factura', 1);
 
-		return view('checkout', ['config' => $sale->toArray(), 'products' => $products]);
+		//return redirect()->route('') view('venta-exitosa', ['config' => $sale->toArray(), 'precioTotal' => $precioTotal]);
+	}
+
+	function ventaExitosa() {
+		return view('venta-exitosa');
 	}
 }

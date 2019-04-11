@@ -18,8 +18,9 @@ $factory->define(App\User::class, function (Faker $faker) {
         'nombre' => $faker->company,
         'ruc' => '12345678900',
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
-        'direccion' => $faker->address, // secret
-        'correo' => $faker->email, // secret
+        'direccion' => $faker->address,
+        'correo' => $faker->email,
+	    'rol' => 'CLIENTE',
         'remember_token' => str_random(10),
     ];
 });

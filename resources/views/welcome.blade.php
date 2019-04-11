@@ -26,12 +26,13 @@
                         <h2 class="product-name">
                             <a href="{{ route('detalleProducto', $product->id) }}">{{ $product->prod_nombre }}</a>
                         </h2>
-                        <div class="product-btns">
-                            <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+                        <div class="product-btns clearfix">
+                            @auth
                             <form action="{{ route('agregarProducto', $product->id) }}" method="post" style="display: inline">
                                 @csrf
                                 <button class="primary-btn add-to-cart pull-right"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
                             </form>
+                            @endauth
                         </div>
                     </div>
                 </div>

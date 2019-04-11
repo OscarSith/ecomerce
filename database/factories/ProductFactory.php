@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Product::class, function (Faker $faker) {
     return [
-        'id_categoria' => $faker->numberBetween(1, 3),
+        'id_categoria' => $faker->numberBetween(1, 5),
         'id_marca' => $faker->numberBetween(1, 9),
         'prod_codigo' => $faker->randomNumber(8),
         'prod_nombre' => $faker->text(20),

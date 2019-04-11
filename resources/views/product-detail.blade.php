@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Producto: ' . $product->prod_nombre)
+
 @section('body')
 	<div class="section">
 		<div class="container">
@@ -60,7 +62,7 @@
 									<li><a href="#">SL</a></li>
 								</ul>
 							</div>
-
+							@auth
 							<div class="product-btns">
 								<form action="{{ route('agregarProducto', $product->id) }}" method="post">
 									@csrf
@@ -71,11 +73,9 @@
 									<button class="primary-btn add-to-cart">
 										<i class="fa fa-shopping-cart"></i> Agregar al carrito
 									</button>
-									<div class="pull-right">
-										<button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
-									</div>
 								</form>
 							</div>
+							@endauth
 						</div>
 					</div>
 					<div class="col-md-12">

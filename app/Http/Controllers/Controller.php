@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -18,7 +19,6 @@ class Controller extends BaseController
 	{
 		// Se usa la funcion middlaware para que se pueda acceder a la session desde el constructor
 		$this->middleware(function ($request, $next) {
-			session(['precioTotal' => $this->totalMontoCarrito()]);
 			session(['cantidadTotal' => $this->totalCantidadProductos()]);
 			return $next($request);
 		});
@@ -37,5 +37,9 @@ class Controller extends BaseController
 
     public function totalCantidadProductos() {
 		return session()->has('products') ? count(session('products')) : 0;
+    }
+
+    public function categorias() {
+		return Category::all(['id', 'cat_nombre']);
     }
 }

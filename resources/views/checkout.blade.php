@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Factura y detalle')
+
 @section('body')
 	<div class="section">
 		<div class="container">
@@ -9,9 +11,9 @@
 						<div class="col-sm-4">
 							De:
 							<address>
-								<strong>Admin, Inc.</strong><br>
-								795 Folsom Ave, Suite 600<br>
-								San Francisco, CA 94107<br>
+								<strong>{{ $configuracion->razon }}</strong><br>
+								Ruc: {{ $configuracion->ruc }} <br>
+								{{ $configuracion->direccion }}<br>
 								Phone: (804) 123-5432<br>
 								Email: info@almasaeedstudio.com
 							</address>
@@ -25,13 +27,6 @@
 								Phone: (804) 123-5432<br>
 								Email: {{ Auth::user()->correo }}
 							</address>
-						</div>
-						<div class="col-sm-4">
-							<b>Invoice #{{ $config['nro_factura'] }}</b><br>
-							<br>
-							<b>Order ID:</b> {{ $config['nro_orden'] }}<br>
-							<b>Payment Due:</b> {{ \Carbon\Carbon::now()->toDateString() }}<br>
-							<b>Account:</b> 968-34567
 						</div>
 					</div>
 					<div class="col-xs-12 table-responsive">
@@ -59,36 +54,42 @@
 						</table>
 						<hr>
 					</div>
-					<div class="row">
-						<div class="col-xs-offset-6 col-xs-6">
-							<p class="lead">Amount Due 2/22/2014</p>
+					<div class="col-sm-12">
+						<div class="row">
+							<div class="col-xs-offset-6 col-xs-6">
+								<p class="lead">Fecha de facturación {{ now()->toDateString() }}</p>
 
-							<div class="table-responsive">
-								<table class="table">
-									<tbody><tr>
-										<th style="width:50%">Subtotal:</th>
-										<td>$250.30</td>
-									</tr>
-									<tr>
-										<th>Tax (9.3%)</th>
-										<td>$10.34</td>
-									</tr>
-									<tr>
-										<th>Shipping:</th>
-										<td>$5.80</td>
-									</tr>
-									<tr>
-										<th>Total:</th>
-										<td>$265.24</td>
-									</tr>
-									</tbody></table>
+								<div class="table-responsive">
+									<table class="table">
+										<tbody>
+										<tr>
+											<th style="width:50%">Subtotal:</th>
+											<td>S/. {{ number_format(floatval($precioTotal / 1.18), 2) }}</td>
+										</tr>
+										<tr>
+											<th>IGV (18%)</th>
+											<td>S/. {{ number_format(floatval($precioTotal) - (floatval($precioTotal) / 1.18), 2) }}</td>
+										</tr>
+										<tr>
+											<th>Total:</th>
+											<td>S/. {{ $precioTotal }}</td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 						<div class="row no-print">
-							<div class="col-xs-12">
-								<a href="invoice-print.html" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print</a>
-								<button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment
-								</button>
+							<div class="col-xs-12 text-right">
+								<a href="{{ route('listarCarrito') }}" class="btn btn-info" style="margin-right: 20px">
+									<i class="fa fa-arrow-left"></i> Regresar
+								</a>
+								<form action="{{ route('generar-venta') }}" method="post" style="display: inline">
+									@csrf
+									<button class="btn btn-success pull-right">
+										Generar Venta
+									</button>
+								</form>
 							</div>
 						</div>
 					</div>

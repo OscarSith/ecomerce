@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>E-Comerce</title>
+	<title>E-Comerce - @yield('title', 'Inicio')</title>
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -57,8 +57,12 @@
 						@endguest
 						@auth
 						<ul class="custom-menu">
-							<li><a href="#"><i class="fa fa-user-o"></i> Mi Cuenta</a></li>
-							<li><a href="{{ route('venta') }}"><i class="fa fa-check"></i> Checkout</a></li>
+							@if (Auth::user()->rol == 'ADMIN')
+							<li>
+								<a href="{{ route('adminHome') }}"><i class="fa fa-user-o"></i> Administrar</a>
+							</li>
+							@endif
+							<li><a href="{{ route('logout') }}"><i class="fa fa-check"></i> Cerrar Sesión</a></li>
 						</ul>
 						@endauth
 					</li>
@@ -77,31 +81,34 @@
 						</a>
 						<div class="custom-menu">
 							<div id="shopping-cart">
+							@if (session()->has('products'))
 								<div class="shopping-cart-list">
-									@if (session()->has('products'))
-										@foreach(session('products') as $product)
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="{{ $product['prod_imagen'] }}" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">
-													{{ $product['prod_precio'] }}
-													<span class="qty">x{{ $product['cantidad'] }}</span>
-												</h3>
-												<h2 class="product-name">
-													<a href="#">{{ $product['prod_nombre'] }}</a>
-												</h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
+									@foreach(session('products') as $product)
+									<div class="product product-widget">
+										<div class="product-thumb">
+											<img src="{{ $product['prod_imagen'] }}" alt="">
 										</div>
-										@endforeach
-									@endif
-								</div>
+										<div class="product-body">
+											<h3 class="product-price">
+												{{ $product['prod_precio'] }}
+												<span class="qty">x{{ $product['cantidad'] }}</span>
+											</h3>
+											<h2 class="product-name">
+												<a href="#">{{ $product['prod_nombre'] }}</a>
+											</h2>
+										</div>
+									</div>
+									@endforeach
+							</div>
 								<div class="shopping-cart-btns">
 									<a href="{{route('listarCarrito')}}" class="main-btn">View Cart</a>
 									<button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
 								</div>
+							@else
+								<p class="text-center" style="margin-bottom: 0">
+									<strong>No hay ningún producto</strong>
+								</p>
+							@endif
 							</div>
 						</div>
 					</li>
@@ -125,62 +132,11 @@
 		<div id="responsive-nav">
 			<!-- category nav -->
 			<div class="category-nav show-on-click">
-				<span class="category-header">Categories <i class="fa fa-list"></i></span>
+				<span class="category-header">Categorias <i class="fa fa-list"></i></span>
 				<ul class="category-list">
-					<li class="dropdown side-dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Computadoras <i class="fa fa-angle-right"></i></a>
-						<div class="custom-menu">
-							<div class="row">
-								<div class="col-md-4">
-									<ul class="list-links">
-										<li><h3 class="list-links-title">Categories</h3></li>
-										<li><a href="#">Women’s Clothing</a></li>
-										<li><a href="#">Men’s Clothing</a></li>
-										<li><a href="#">Phones & Accessories</a></li>
-										<li><a href="#">Jewelry & Watches</a></li>
-										<li><a href="#">Bags & Shoes</a></li>
-									</ul>
-									<hr class="hidden-md hidden-lg">
-								</div>
-								<div class="col-md-4">
-									<ul class="list-links">
-										<li>
-											<h3 class="list-links-title">Categories</h3></li>
-										<li><a href="#">Women’s Clothing</a></li>
-										<li><a href="#">Men’s Clothing</a></li>
-										<li><a href="#">Phones & Accessories</a></li>
-										<li><a href="#">Jewelry & Watches</a></li>
-										<li><a href="#">Bags & Shoes</a></li>
-									</ul>
-									<hr class="hidden-md hidden-lg">
-								</div>
-								<div class="col-md-4">
-									<ul class="list-links">
-										<li><h3 class="list-links-title">Categories</h3></li>
-										<li><a href="#">Women’s Clothing</a></li>
-										<li><a href="#">Men’s Clothing</a></li>
-										<li><a href="#">Phones & Accessories</a></li>
-										<li><a href="#">Jewelry & Watches</a></li>
-										<li><a href="#">Bags & Shoes</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="row hidden-sm hidden-xs">
-								<div class="col-md-12">
-									<hr>
-									<a class="banner banner-1" href="#">
-										<img src="./img/banner05.jpg" alt="">
-										<div class="banner-caption text-center">
-											<h2 class="white-color">NEW COLLECTION</h2>
-											<h3 class="white-color font-weak">HOT DEAL</h3>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li><a href="#">Laptops</a></li>
-					<li><a href="#">Impresoras</a></li>
+					@foreach(session('categorias') as $categoria)
+					<li><a href="{{ route('productList') }}?id_categoria={{ $categoria->id }}">{{ $categoria->cat_nombre }}</a></li>
+					@endforeach
 				</ul>
 			</div>
 			<!-- /category nav -->
@@ -193,9 +149,9 @@
 					<li class="dropdown default-dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Productos <i class="fa fa-caret-down"></i></a>
 						<ul class="custom-menu">
-							<li><a href="{{ route('productList') }}?id_marca=0&stock=1&sort=alfa">Lista de precios</a></li>
+							<li><a href="{{ route('productList') }}?id_marca=0&id_categoria=0&stock=1&sort=1">Lista de precios</a></li>
 							<li><a href="{{ route('listBrands')}}">Productos por marca</a></li>
-							<li><a href="product-page.html">Product Details</a></li>
+							{{--<li><a href="product-page.html">Product Details</a></li>--}}
 						</ul>
 					</li>
 					<li><a href="#">Contacto</a></li>
@@ -306,7 +262,7 @@
 				<!-- footer copyright -->
 				<div class="footer-copyright">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+					Copyright &copy;{{ today()->year }} All rights reserved
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</div>
 				<!-- /footer copyright -->

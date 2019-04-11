@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Carrito de compras')
+
 @section('body')
 	<div class="section">
 		<div class="container">
@@ -64,27 +66,27 @@
 									<th colspan="3" class="empty"></th>
 									<th>Sub Total</th>
 									<th class="sub-total" colspan="2">
-										S/. {{ number_format(floatval(session('precioTotal') / 1.18), 2) }}
+										S/. {{ number_format(floatval($precioTotal / 1.18), 2) }}
 									</th>
 								</tr>
 								<tr>
 									<th colspan="3" class="empty"></th>
 									<th>IGV</th>
 									<th colspan="2" class="sub-total">
-										S/. {{ number_format(floatval(session('precioTotal')) - (floatval(session('precioTotal')) / 1.18), 2) }}
+										S/. {{ number_format(floatval($precioTotal) - (floatval($precioTotal) / 1.18), 2) }}
 									</th>
 								</tr>
 								<tr>
 									<th colspan="3" class="empty"></th>
 									<th>Total a pagar</th>
 									<th class="total" colspan="2">
-										S/. {{ session('precioTotal') }}
+										S/. {{ $precioTotal }}
 									</th>
 								</tr>
 							</tfoot>
 						</table>
 						<div class="pull-right">
-							<a href="{{ route('venta') }}" class="primary-btn">Generar Venta</a>
+							<a href="{{ route('detalleVenta') }}" class="primary-btn">Siguiente</a>
 						</div>
 					</div>
 				</div>

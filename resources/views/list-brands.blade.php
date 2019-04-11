@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title', 'Listado de productos por marca')
+
 @section('body')
 	<div class="section">
 		<div class="container">

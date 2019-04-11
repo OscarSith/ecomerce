@@ -492,6 +492,7 @@ textarea.input {
   background: #F8694A;
   color: #FFF;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .category-nav .category-header>i {
@@ -573,6 +574,7 @@ textarea.input {
   padding: 15px;
   color: #FFF;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .menu-nav .menu-list>li>a:hover, .menu-nav .menu-list>li>a:focus, .menu-nav .menu-list>li.dropdown.open>a {
