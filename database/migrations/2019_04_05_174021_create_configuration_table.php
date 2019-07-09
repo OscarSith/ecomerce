@@ -17,9 +17,9 @@ class CreateConfigurationTable extends Migration
             $table->increments('id');
             $table->integer('nro_orden', false, true);
             $table->integer('nro_factura', false, true);
-            $table->string('razon');
+            $table->string('razon', 120);
             $table->char('ruc', 11);
-            $table->string('direccion');
+            $table->string('direccion', 160);
         });
     }
 

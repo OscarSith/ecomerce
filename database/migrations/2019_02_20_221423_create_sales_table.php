@@ -16,8 +16,8 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_user')->unsigned();
-            $table->string('nro_orden');
-            $table->string('nro_factura');
+            $table->string('nro_orden', 20);
+            $table->string('nro_factura', 20);
             $table->decimal('total_venta', 6, 2);
             $table->timestamps();
         });

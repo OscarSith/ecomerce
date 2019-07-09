@@ -17,10 +17,10 @@ class CreateUsersTable extends Migration
             $table->increments('id');
 	        $table->string('ruc')->unique();
 	        $table->enum('rol', ['ADMIN', 'CLIENTE'])->default('ADMIN');
-	        $table->string('nombre');
-	        $table->string('direccion');
-	        $table->string('correo');
-            $table->string('password');
+	        $table->string('nombre', 100);
+	        $table->string('direccion', 140);
+	        $table->string('correo', 100);
+            $table->string('password', 100);
             $table->rememberToken();
             $table->timestamps();
         });

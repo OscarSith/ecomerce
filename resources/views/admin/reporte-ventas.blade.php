@@ -34,7 +34,8 @@
 						</tr>
 						<tr class="hidden">
 							<td colspan="3" class="table-detail">
-								<table class="table table-striped table-bordered"></table>
+								<table class="table table-striped table-bordered">
+								</table>
 							</td>
 						</tr>
 					@endforeach
@@ -80,9 +81,9 @@
 					var html = '';
 
 					data.forEach(function (invoice) {
-						html += '<tr><td>' + invoice.nro_orden + '</td>' +
-							'<td>' + invoice.nro_factura + '</td>' +
-							'<td>S/ ' + parseFloat(invoice.total_venta).toFixed(2) + '</td>' +
+						html += '<tr><td><small>Nro. Orden:</small><br>' + invoice.nro_orden + '</td>' +
+							'<td><small>Nro. Factura:</small><br>' + invoice.nro_factura + '</td>' +
+							'<td><small>Precio Total:</small><br>S/ ' + parseFloat(invoice.total_venta).toFixed(2) + '</td>' +
 							'<td class="text-right"><small>' + invoice.created_at + '</small></td></tr>';
 					});
 

@@ -17,10 +17,10 @@ class CreateProductsTable extends Migration
             $table->increments('id');
 	        $table->integer('id_categoria')->unsigned();
 	        $table->integer('id_marca')->unsigned();
-	        $table->string('prod_codigo');
-	        $table->string('prod_nombre');
-	        $table->string('prod_info');
-	        $table->string('prod_imagen');
+	        $table->string('prod_codigo', 20);
+	        $table->string('prod_nombre', 100);
+	        $table->string('prod_info', 180);
+	        $table->string('prod_imagen', 120);
 	        $table->text('prod_detalle');
 	        $table->decimal('prod_precio', 6, 2);
             $table->integer('prod_stock');

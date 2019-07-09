@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Log;
 class AdminController extends Controller
 {
     public function index() {
-    	return view('admin.home');
+	    $enterprices = User::where('rol', '=', 'CLIENTE')->get(['id', 'ruc', 'nombre', 'correo']);
+    	return view('admin.home', compact('enterprices'));
     }
 
     public function storeClient(Request $request) {
