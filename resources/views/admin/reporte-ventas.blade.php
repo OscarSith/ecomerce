@@ -16,7 +16,7 @@
 				{{ session('message') }}
 			</div>
 		@endif
-		<table class="table table-hover">
+		<table class="table table-hover" id="table-report">
 			<thead>
 				<tr>
 					<th>Empresa</th>
@@ -27,10 +27,15 @@
 			<tbody>
 				@if (count($reporte))
 					@foreach($reporte as $fila)
-						<tr>
+						<tr id="{{$fila->id_user}}" class="main-row">
 							<td>{{ $fila->nombre }}</td>
 							<td>{{ $fila->facturas }}</td>
 							<td>{{ $fila->total_venta }}</td>
+						</tr>
+						<tr class="hidden">
+							<td colspan="3" class="table-detail">
+								<table class="table table-striped table-bordered"></table>
+							</td>
 						</tr>
 					@endforeach
 				@else
@@ -43,4 +48,49 @@
 			</tbody>
 		</table>
 	</div>
+@endsection
+
+@section('js')
+	<script>
+		var $table = $('#table-report');
+
+		$table.on('click', 'tr.main-row', function (e) {
+			var url = '{{{ route('listaFacturas', ':ID') }}}';
+			console.log(url);
+			var $tr = $(e.currentTarget);
+			var $nextTr = $tr.next();
+
+			if ($nextTr.hasClass('hidden')) {
+				$nextTr.removeClass('hidden');
+			} else {
+				$nextTr.addClass('hidden');
+				return ;
+			}
+
+			if (!$tr.hasClass('called')) {
+				var id = $tr.attr('id');
+				url = url.replace(':ID', id);
+
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': '{{{ csrf_token() }}}'
+					}
+				});
+				$.get(url, function (data) {
+					var html = '';
+
+					data.forEach(function (invoice) {
+						html += '<tr><td>' + invoice.nro_orden + '</td>' +
+							'<td>' + invoice.nro_factura + '</td>' +
+							'<td>S/ ' + parseFloat(invoice.total_venta).toFixed(2) + '</td>' +
+							'<td class="text-right"><small>' + invoice.created_at + '</small></td></tr>';
+					});
+
+					$tr.addClass('called');
+					$nextTr.find('table').html(html);
+					console.log(id);
+				});
+			}
+		});
+	</script>
 @endsection

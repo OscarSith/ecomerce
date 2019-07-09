@@ -52,10 +52,20 @@ class SaleController extends Controller
 		DB::table('configuracion')->increment('nro_orden', 1);
 		DB::table('configuracion')->increment('nro_factura', 1);
 
-		//return redirect()->route('') view('venta-exitosa', ['config' => $sale->toArray(), 'precioTotal' => $precioTotal]);
+		return redirect()->route('venta_exitosa', $sale->id);
 	}
 
-	function ventaExitosa() {
-		return view('venta-exitosa');
+	function ventaExitosa($id) {
+		$sale = Sale::find($id);
+		$productDetails = DB::table('productsDetails')->where('id_venta', $sale->id)->get();
+		$precioTotal = 0.0;
+
+		foreach ($productDetails as $product) {
+			$precioTotal += $product->total;
+		}
+
+		$precioTotal = number_format($precioTotal, 2);
+
+		return view('venta-exitosa', compact('precioTotal', 'sale'));
 	}
 }

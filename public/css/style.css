@@ -1699,7 +1699,21 @@ textarea.input {
 
 .custom-dots .slick-dots {
   position: static;
-  margin: 15px 0px;
+  margin: 15px 0;
+}
+
+/* ADMIN */
+#table-report tr.main-row {
+  cursor: pointer;
+}
+.table .table-detail {
+  padding-top: 0;
+}
+.table .table-detail .table {
+  border-top: none;
+}
+.table .table-detail .table tr:first-child td {
+  border-top: none;
 }
 
 /*=========================================================

@@ -39,36 +39,32 @@
 							</div>
 							@endif
 							<h2 class="product-name">{{ $product->prod_nombre }}</h2>
-							<h3 class="product-price">S/. {{ $product->prod_precio }}</h3>
-							<div>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o empty"></i>
-								</div>
-							</div>
+							<h3 class="product-price">
+								@auth
+								S/. {{ $product->prod_precio }}
+								@endauth
+							</h3>
 							@auth
 							<p><strong>Disponible:</strong> {{ $product->prod_stock }} In Stock</p>
 							@endauth
 							<p><strong>Marca:</strong> E-SHOP</p>
 							<p>{{ $product->prod_detalle }}</p>
-							<div class="product-options">
+							{{--<div class="product-options">
 								<ul class="size-option">
 									<li><span class="text-uppercase">Size:</span></li>
 									<li class="active"><a href="#">S</a></li>
 									<li><a href="#">XL</a></li>
 									<li><a href="#">SL</a></li>
 								</ul>
-							</div>
+							</div>--}}
 							@auth
+							<hr>
 							<div class="product-btns">
 								<form action="{{ route('agregarProducto', $product->id) }}" method="post">
 									@csrf
 									<div class="qty-input">
 										<span class="text-uppercase">Cantidad: </span>
-										<input class="input" type="number" name="cantidad">
+										<input class="input" type="number" name="cantidad" value="1">
 									</div>
 									<button class="primary-btn add-to-cart">
 										<i class="fa fa-shopping-cart"></i> Agregar al carrito

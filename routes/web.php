@@ -23,7 +23,7 @@ Route::post('/agregar-producto/{id}/carrito', 'ProductController@agregarProducto
 Route::get('/listar-carrito', 'ProductController@listarCarrito')->name('listarCarrito');
 Route::delete('/eliminar-producto/{id}/carrito', 'ProductController@eliminarItem')->name('eliminarItem');
 Route::put('/actualizar-producto/{id}/carrito', 'ProductController@actualizarItem')->name('actualizarItem');
-Route::get('/venta-exitosa', 'ProductController@actualizarItem')->name('actualizarItem');
+Route::get('/venta-exitosa-{id}', 'SaleController@ventaExitosa')->name('venta_exitosa');
 
 Route::get('detalle-venta', 'SaleController@detalleVenta')->name('detalleVenta');
 Route::post('generar-venta', 'SaleController@venta')
@@ -35,4 +35,6 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function ($route)
 	$route->get('register', 'AdminController@indexRegister')->name('register');
 	$route->post('register', 'AdminController@storeClient')->name('storeClient');
 	$route->get('reporte-ventas', 'AdminController@reporteDeVentas')->name('reporteDeVentas');
+
+	$route->get('{id_user}/facturas', 'AdminController@listaFacturasPorUserId')->name('listaFacturas');
 });
