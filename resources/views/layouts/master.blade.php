@@ -24,7 +24,7 @@
 				<!-- Logo -->
 				<div class="header-logo">
 					<a class="logo" href="/">
-						<img src="{{asset('img/logo.png')}}" alt="">
+						<img src="{{asset('img/logo.jpeg')}}" alt="Logo" class="img-responsive">
 					</a>
 				</div>
 				<!-- /Logo -->
