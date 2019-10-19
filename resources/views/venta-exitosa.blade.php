@@ -8,14 +8,34 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h2 class="text-center">Venta generada exitosamente</h2>
+				<br>
+				<br>
 				<p class="text-center">Aqui los detalles de la venta</p>
-				<div class="col-sm-4 col-sm-offset-4">
-					<b>Factura #{{ $sale['nro_factura'] }}</b><br>
+				<div class="col-sm-8 col-sm-offset-2">
+					<table class="table table-bordered">
+						<tr>
+							<th>Factura</th>
+							<td><b> #{{ $sale['nro_factura'] }}</b></td>
+						</tr>
+						<tr>
+							<th>Order ID:</th>
+							<td><b> {{ $sale['nro_orden'] }}</b></td>
+						</tr>
+						<tr>
+							<th>Monto total a pagar:</th>
+							<td><b> S/ {{ $precioTotal }}</b></td>
+						</tr>
+						<tr>
+							<th>Fecha de creación de la Factura:</th>
+							<td>{{ $sale->created_at->format('Y-m-d') }}</td>
+						</tr>
+						<tr>
+							<th>Nro cuenta a abonar:</th>
+							<td>192819182713332</td>
+						</tr>
+					</table>
 					<br>
-					<b>Order ID:</b> {{ $sale['nro_orden'] }}<br>
-					<b>Monto total a pagar:</b> S/ {{ $precioTotal }}<br>
-					<b>Fecha de creación de la Factura:</b> {{ $sale->created_at->format('Y-m-d') }}<br>
-					<b>Nro cuenta a abonar:</b> 192819182713
+					<br>
 				</div>
 			</div>
 		</div>
@@ -24,7 +44,7 @@
 		<br>
 		<div class="row">
 			<div class="col-sm-12">
-				<p class="text-center">ir a <a href="{{ route('home') }}">la página principal</a></p>
+				<p class="text-center">ir a <a href="{{ route('home') }}" class="btn btn-primary">la página principal</a></p>
 			</div>
 		</div>
 	</div>

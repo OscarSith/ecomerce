@@ -7,31 +7,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="product product-details clearfix">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div id="product-main-view">
 							<div class="product-view">
-								<img src="{{ $product->prod_imagen }}" alt="">
-							</div>
-							<div class="product-view">
-								<img src="{{ asset('/img/main-product02.jpg') }}" alt="">
-							</div>
-							<div class="product-view">
-								<img src="{{ asset('/img/main-product03.jpg') }}" alt="">
-							</div>
-						</div>
-						<div id="product-view">
-							<div class="product-view">
-								<img src="{{ $product->prod_imagen }}" alt="">
-							</div>
-							<div class="product-view">
-								<img src="{{ asset('img/thumb-product02.jpg') }}" alt="">
-							</div>
-							<div class="product-view">
-								<img src="{{ asset('img/thumb-product03.jpg') }}" alt="">
+								<img src="{{ asset('img/products/' . $product->prod_imagen) }}" alt="">
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6 col-md-offset-2">
 						<div class="product-body">
 							@if ($product->prod_new)
 							<div class="product-label">
@@ -44,11 +27,21 @@
 								S/. {{ $product->prod_precio }}
 								@endauth
 							</h3>
+							<br><br><br>
+							<div>
+								<p>{{ $product->prod_info }}</p>
+							</div>
+							<br>
 							@auth
-							<p><strong>Disponible:</strong> {{ $product->prod_stock }} In Stock</p>
+								@if ($product->prod_stock > 0)
+								<p>
+									<strong>Disponible:</strong> {{ $product->prod_stock }} en Stock
+								</p>
+								@else
+								<p><strong>Producto Agotado</strong></p>
+								@endif
 							@endauth
-							<p><strong>Marca:</strong> E-SHOP</p>
-							<p>{{ $product->prod_detalle }}</p>
+							<p><strong>Marca:</strong> {{ $brandName }}</p>
 							{{--<div class="product-options">
 								<ul class="size-option">
 									<li><span class="text-uppercase">Size:</span></li>
@@ -85,7 +78,7 @@
 									<p>{{ $product->prod_info }}</p>
 								</div>
 								<div id="tab2" class="tab-pane fade in">
-									<p>Tab 2</p>
+									<pre>{{ $product->prod_detalle }}</pre>
 								</div>
 							</div>
 						</div>

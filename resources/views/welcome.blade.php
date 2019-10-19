@@ -17,7 +17,7 @@
             <div class="col-md-3 col-sm-6 col-xs-6">
                 <div class="product product-single">
                     <div class="product-thumb">
-                        <img src="{{ $product->prod_imagen }}" alt="">
+                        <img src="{{ asset('img/products/' . $product->prod_imagen) }}" alt="{{ $product->prod_nombre }}" class="img-responsive">
                     </div>
                     <div class="product-body">
                         @auth

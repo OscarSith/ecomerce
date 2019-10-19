@@ -92,7 +92,7 @@
 									<tr>
 										<td>
 											<a href="{{ route('detalleProducto', $product->id) }}">
-												<img src="{{ $product->prod_imagen }}" alt="" style="width: 100px">
+												<img src="{{ asset('img/products/' . $product->prod_imagen) }}" alt="" class="img-responsive" style="width: 100px">
 											</a>
 										</td>
 										<td>

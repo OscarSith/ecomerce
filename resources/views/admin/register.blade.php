@@ -17,6 +17,7 @@
 			</div>
 		@endif
 		<form action="{{ route('storeClient') }}" method="post">
+			<input type="hidden" name="rol" value="CLIENTE">
 			@csrf
 			<div class="form-group">
 				<div class="row">
@@ -41,14 +42,6 @@
 			<div class="form-group">
 				<label for="password">Contraseña</label>
 				<input type="password" class="form-control" name="password" id="password">
-			</div>
-			<div class="form-group">
-				<label class="radio-inline">
-					<input type="radio" name="rol" id="rolAdmin" value="ADMIN"> ADMIN
-				</label>
-				<label class="checkbox-inline">
-					<input type="radio" name="rol" id="rolCliente" value="CLIENTE" checked> CLIENTE
-				</label>
 			</div>
 			<button class="btn btn-primary">Crear</button>
 		</form>

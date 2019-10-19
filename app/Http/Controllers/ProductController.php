@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,7 +51,11 @@ class ProductController extends Controller
 
     public function detalleProducto($id) {
 		$product = Product::find($id);
-		return view('product-detail', compact('product'));
+
+		$brand = Brand::find($product->id_marca);
+		$brandName = $brand->brand_name;
+
+		return view('product-detail', compact('product', 'brandName'));
     }
 
     function agregarProductoCarrito(Request $request, $id) {

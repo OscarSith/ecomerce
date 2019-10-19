@@ -906,8 +906,7 @@ textarea.input {
 .product.product-single .product-thumb {
   position: relative;
   margin-bottom: 15px;
-  width: 263px;
-  height: 197px;
+  min-height: 197px;
 }
 
 .product.product-single .product-thumb>img {
@@ -950,6 +949,7 @@ textarea.input {
   opacity: 1;
   visibility: visible;
 }*/
+
 
 .product.product-single .product-label {
   position: absolute;
@@ -1312,6 +1312,10 @@ textarea.input {
 /*----------------------------*\
 	Product details
 \*----------------------------*/
+
+.product-details .product-body {
+  margin-top: 30px;
+}
 
 .product.product-details .product-name {
   margin-top: 15px;
